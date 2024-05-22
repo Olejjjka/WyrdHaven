@@ -106,12 +106,12 @@ TextureImporter:
       name: Dead_0
       rect:
         serializedVersion: 2
-        x: 18
+        x: 19
         y: 0
-        width: 85
-        height: 51
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 83
+        height: 50
+      alignment: 9
+      pivot: {x: 0.5, y: 0.03}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -127,12 +127,12 @@ TextureImporter:
       name: Dead_1
       rect:
         serializedVersion: 2
-        x: 146
+        x: 147
         y: 0
-        width: 91
-        height: 23
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 89
+        height: 22
+      alignment: 9
+      pivot: {x: 0.5, y: 0.03}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -147,7 +147,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 8522dc036a8dba540b9016c1ab4aca4b
     internalID: 0
     vertices: []
     indices: 

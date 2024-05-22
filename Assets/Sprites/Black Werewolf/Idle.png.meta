@@ -124,10 +124,10 @@ TextureImporter:
       name: Idle_0
       rect:
         serializedVersion: 2
-        x: 35
+        x: 36
         y: 0
-        width: 78
-        height: 58
+        width: 76
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,10 +145,10 @@ TextureImporter:
       name: Idle_1
       rect:
         serializedVersion: 2
-        x: 162
+        x: 163
         y: 0
-        width: 79
-        height: 58
+        width: 77
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,10 +166,10 @@ TextureImporter:
       name: Idle_2
       rect:
         serializedVersion: 2
-        x: 290
+        x: 291
         y: 0
-        width: 79
-        height: 59
+        width: 77
+        height: 58
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,10 +187,10 @@ TextureImporter:
       name: Idle_3
       rect:
         serializedVersion: 2
-        x: 418
+        x: 419
         y: 0
-        width: 79
-        height: 59
+        width: 77
+        height: 58
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,10 +208,10 @@ TextureImporter:
       name: Idle_4
       rect:
         serializedVersion: 2
-        x: 545
+        x: 546
         y: 0
-        width: 80
-        height: 59
+        width: 78
+        height: 58
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -229,10 +229,10 @@ TextureImporter:
       name: Idle_5
       rect:
         serializedVersion: 2
-        x: 674
+        x: 675
         y: 0
-        width: 79
-        height: 59
+        width: 77
+        height: 58
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -250,10 +250,10 @@ TextureImporter:
       name: Idle_6
       rect:
         serializedVersion: 2
-        x: 802
+        x: 803
         y: 0
-        width: 79
-        height: 59
+        width: 77
+        height: 58
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -271,10 +271,10 @@ TextureImporter:
       name: Idle_7
       rect:
         serializedVersion: 2
-        x: 930
+        x: 931
         y: 0
-        width: 79
-        height: 58
+        width: 77
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -291,7 +291,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 11d2fc401e8b9514986217d96effc99e
     internalID: 0
     vertices: []
     indices: 
