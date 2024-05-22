@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 7251297781267619744}
   - component: {fileID: 2362093330243532807}
   - component: {fileID: 1833053015217432912}
+  - component: {fileID: 4038665045985604560}
   m_Layer: 0
   m_Name: Black Werewolf
   m_TagString: Untagged
@@ -116,8 +117,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.419, y: 1.682, z: -0.009}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8491600308126743167}
   m_Father: {fileID: 0}
@@ -183,8 +184,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.08688895, y: -0.22594109}
-  m_Size: {x: 0.6256648, y: 0.19114077}
+  m_Offset: {x: -0.09643569, y: -0.32141602}
+  m_Size: {x: 0.43471614, y: 0.21023616}
   m_Direction: 1
 --- !u!195 &2362093330243532807
 NavMeshAgent:
@@ -220,10 +221,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a1e901f259c3ed4493399dfb5b0f88b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingState: 1
-  roamingDistanceMax: 7
-  roamingDistanceMin: 3
-  roamingTimerMax: 2
+  _startingState: 0
+  _roamingDistanceMax: 7
+  _roamingDistanceMin: 3
+  _roamingTimerMax: 2
+  _isAttackingEnemy: 0
+  _isChasingEnemy: 0
+--- !u!61 &4038665045985604560
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4617187538212063136}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.014321268, y: 0.004773751}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.7804078, y: 0.8376931}
+  m_EdgeRadius: 0
 --- !u!1 &8943374146343242978
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,6 +284,7 @@ GameObject:
   - component: {fileID: 8491600308126743167}
   - component: {fileID: 8146483520150751686}
   - component: {fileID: 3967419548984582547}
+  - component: {fileID: 2355026346111975231}
   m_Layer: 0
   m_Name: Black Werewolf Visual
   m_TagString: Untagged
@@ -334,3 +384,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2355026346111975231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8943374146343242978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23ef510aabf1a28488819a7822c0b6f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

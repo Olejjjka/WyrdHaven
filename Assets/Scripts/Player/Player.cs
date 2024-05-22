@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[SelectionBase]
+
 public class Player : MonoBehaviour
 {
     public static Player Instance {  get; private set; }
 
-    [SerializeField] private float movingSpeed = 5f;
+    [SerializeField] private float movingSpeed = 3.5f;
     Vector2 inputVector;
 
     private Rigidbody2D rb;
