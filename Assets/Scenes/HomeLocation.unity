@@ -5020,6 +5020,10 @@ PrefabInstance:
       propertyPath: _attackingDistance
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4038665045985604560, guid: 6a3b5ea58d062a448ad699fc6ca0d912, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4617187538212063136, guid: 6a3b5ea58d062a448ad699fc6ca0d912, type: 3}
       propertyPath: m_Name
       value: Black Werewolf
