@@ -5,16 +5,16 @@ using System.Collections;
 
 public class LoadingManager : MonoBehaviour
 {
-    public string sceneToLoad; // »м€ сцены, которую нужно загрузить
     public Slider progressBar; // —сылка на слайдер
     public Image progressIcon; // —сылка на иконку
 
     void Start()
     {
-        StartCoroutine(LoadSceneAsync());
+        string sceneToLoad = PlayerPrefs.GetString("SceneToLoad");
+        StartCoroutine(LoadSceneAsync(sceneToLoad));
     }
 
-    IEnumerator LoadSceneAsync()
+    IEnumerator LoadSceneAsync(string sceneToLoad)
     {
         // јсинхронна€ загрузка сцены
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneToLoad);
