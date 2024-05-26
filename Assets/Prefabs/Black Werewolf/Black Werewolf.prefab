@@ -226,13 +226,13 @@ MonoBehaviour:
   _startingState: 1
   _roamingDistanceMax: 7
   _roamingDistanceMin: 3
-  _roamingTimerMax: 10
-  _isAttackingEnemy: 0
+  _roamingTimerMax: 2
+  _isAttackingEnemy: 1
   _isChasingEnemy: 1
   _chasingDistance: 4
   _chasingSpeedMultiplier: 1.5
-  _attackingDistance: 2
-  _attackRate: 2
+  _attackingDistance: 1
+  _attackRate: 1
 --- !u!61 &4038665045985604560
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -240,7 +240,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4617187538212063136}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}

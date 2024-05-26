@@ -7,17 +7,17 @@ using System;
 
 public class EnemyAI : MonoBehaviour
 {
-    [SerializeField] private State _startingState;
+    [SerializeField] private State _startingState = State.Roaming;
     [SerializeField] private float _roamingDistanceMax = 7f;
     [SerializeField] private float _roamingDistanceMin = 3f;
     [SerializeField] private float _roamingTimerMax = 2f;
 
-    [SerializeField] private bool _isAttackingEnemy = false;
-    [SerializeField] private bool _isChasingEnemy = false;
+    [SerializeField] private bool _isAttackingEnemy = true;
+    [SerializeField] private bool _isChasingEnemy = true;
     [SerializeField] private float _chasingDistance = 4f;
     [SerializeField] private float _chasingSpeedMultiplier = 1.5f;
-    [SerializeField] private float _attackingDistance = 2f;
-    [SerializeField] private float _attackRate = 2f;
+    [SerializeField] private float _attackingDistance = 1.5f;
+    [SerializeField] private float _attackRate = 1f;
     private float _nextAttackTime = 0f;
 
     private NavMeshAgent _navMeshAgent;

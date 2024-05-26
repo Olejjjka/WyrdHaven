@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class PlayerVisual : MonoBehaviour
 {
+    [SerializeField] private Player player;
+
     private Animator animator;
     private SpriteRenderer spriteRenderer;
 
     private const string IS_RUNNING = "IsRunning";
+    private const string ATTACK = "Attack";
 
     private void Awake()
     {
@@ -15,10 +18,20 @@ public class PlayerVisual : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    private void Start()
+    {
+        player.OnAttack += Player_OnAttack;
+    }
+
     private void Update()
     {
         animator.SetBool(IS_RUNNING, Player.Instance.IsRunning());
         AdjustPlayerFacingDirection();
+    }
+
+    private void Player_OnAttack(object sender, System.EventArgs e)
+    {
+        animator.SetTrigger(ATTACK);
     }
 
     private void AdjustPlayerFacingDirection()
