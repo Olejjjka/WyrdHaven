@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public static Player Instance {  get; private set; }
     public event EventHandler OnAttack;
 
+    [SerializeField] private int _damageAmount = 2;
     [SerializeField] private float movingSpeed = 3.5f;
     Vector2 inputVector;
 
@@ -17,6 +18,8 @@ public class Player : MonoBehaviour
 
     private float minMovingSpeed = 0.1f;
     private bool isRunning = false;
+
+    private PolygonCollider2D _polygonCollider2D;
 
 
 
@@ -29,15 +32,19 @@ public class Player : MonoBehaviour
     {
         Instance = this;
         rb = GetComponent<Rigidbody2D>();
+        _polygonCollider2D = GetComponent<PolygonCollider2D>();
     }
 
     private void Start()
     {
+
         GameInput.Instance.OnPlayerAttack += GameInput_OnPlayerAttack;
+
     }
 
     private void GameInput_OnPlayerAttack(object sender, System.EventArgs e)
     {
+
         Attack();
     }
 
@@ -49,6 +56,24 @@ public class Player : MonoBehaviour
             isRunning = true;
         else
             isRunning = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.transform.TryGetComponent(out EnemyEntity enemyEntity))
+        {
+            enemyEntity.TakeDamage(_damageAmount);
+        }
+    }
+
+    public void AttackColliderTurnOff()
+    {
+        _polygonCollider2D.enabled = false;
+    }
+
+    public void AttackColliderTurnOn()
+    {
+        _polygonCollider2D.enabled = true;
     }
 
     private void Attack()
@@ -66,4 +91,6 @@ public class Player : MonoBehaviour
         Vector3 playerScreenPosition = Camera.main.WorldToScreenPoint(transform.position);
         return playerScreenPosition;
     }
+
+
 }

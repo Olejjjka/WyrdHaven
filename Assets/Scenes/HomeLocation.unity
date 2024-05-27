@@ -2655,7 +2655,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 22bec41eadcba834eab5151c7bc568f9, type: 3}
   m_Resource: {fileID: 8300000, guid: 22bec41eadcba834eab5151c7bc568f9, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -4460,6 +4460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4d5c34488a669942b69f5ff38be6994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damageAmount: 2
   movingSpeed: 5
 --- !u!50 &1994073740
 Rigidbody2D:
@@ -4555,7 +4556,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -5040,23 +5041,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1554494216294771483, guid: 6a3b5ea58d062a448ad699fc6ca0d912, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4038665045985604560, guid: 6a3b5ea58d062a448ad699fc6ca0d912, type: 3}
-      propertyPath: m_Enabled
-      value: 1
+    - target: {fileID: 2362093330243532807, guid: 6a3b5ea58d062a448ad699fc6ca0d912, type: 3}
+      propertyPath: m_Speed
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4617187538212063136, guid: 6a3b5ea58d062a448ad699fc6ca0d912, type: 3}
       propertyPath: m_Name
       value: Black Werewolf
-      objectReference: {fileID: 0}
-    - target: {fileID: 5456916971170960194, guid: 6a3b5ea58d062a448ad699fc6ca0d912, type: 3}
-      propertyPath: m_BodyType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7251297781267619744, guid: 6a3b5ea58d062a448ad699fc6ca0d912, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8848350551120399142, guid: 6a3b5ea58d062a448ad699fc6ca0d912, type: 3}
       propertyPath: m_LocalPosition.x

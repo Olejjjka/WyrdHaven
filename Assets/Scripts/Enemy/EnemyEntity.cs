@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class EnemyEntity : MonoBehaviour
 {
-    [SerializeField] private int _maxHealth;
+    [SerializeField] private int _maxHealth = 10;
     private int _currentHealth;
 
     private PolygonCollider2D _polygonCollider2D;

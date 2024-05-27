@@ -49,4 +49,13 @@ public class PlayerVisual : MonoBehaviour
         }
     }
 
+    public void AxeAttackAnimatoinTurnOff()
+    {
+        player.AttackColliderTurnOff();
+    }
+
+    public void AxeAttackAnimatoinTurnOn()
+    {
+        player.AttackColliderTurnOn();
+    }
 }
