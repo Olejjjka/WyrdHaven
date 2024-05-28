@@ -7,10 +7,12 @@ using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
-    public GameObject settingsPanel; // Панель настроек
+    public GameObject settingsPanel;
     public Slider volumeSlider;
     public TMP_Dropdown resolutionDropdown;
     public Toggle fullscreenToggle;
+
+    public string gameSceneName = "Home";
 
     private Resolution[] resolutions;
 
@@ -19,7 +21,7 @@ public class MainMenu : MonoBehaviour
         // Инициализация ползунка громкости
         float savedVolume = PlayerPrefs.GetFloat("Volume", 1.0f);
         volumeSlider.value = savedVolume;
-        SetVolume(savedVolume); // Применение сохраненного значения громкости
+        SetVolume(savedVolume);
         volumeSlider.onValueChanged.AddListener(SetVolume);
 
         // Инициализация разрешений
@@ -52,7 +54,7 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGame()
     {
-        LoadScene("HomeLocation"); // Замените "GameScene" на имя вашей игровой сцены
+        LoadScene(gameSceneName);
     }
 
     public void ExitGame()
@@ -94,6 +96,6 @@ public class MainMenu : MonoBehaviour
     void LoadScene(string sceneName)
     {
         PlayerPrefs.SetString("SceneToLoad", sceneName);
-        SceneManager.LoadScene("LoadingScene"); // Замените "LoadingScene" на имя вашей сцены загрузки
+        SceneManager.LoadScene("LoadingScene");
     }
 }
