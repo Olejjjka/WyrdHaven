@@ -101,7 +101,6 @@ GameObject:
   - component: {fileID: 4038665045985604560}
   - component: {fileID: 1554494216294771483}
   - component: {fileID: 7599527526999581127}
-  - component: {fileID: 2439303800183447694}
   m_Layer: 0
   m_Name: Black Werewolf
   m_TagString: Enemy1
@@ -332,28 +331,6 @@ MonoBehaviour:
   attackCooldown: 2
   chaseRange: 5
   attackRange: 1.5
---- !u!114 &2439303800183447694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4617187538212063136}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a1e901f259c3ed4493399dfb5b0f88b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _startingState: 0
-  _roamingDistanceMax: 7
-  _roamingDistanceMin: 3
-  _roamingTimerMax: 2
-  _isAttackingEnemy: 0
-  _isChasingEnemy: 0
-  _chasingDistance: 4
-  _chasingSpeedMultiplier: 1.5
-  _attackingDistance: 2
-  _attackRate: 2
 --- !u!1 &8943374146343242978
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,7 +419,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!95 &3967419548984582547
 Animator:
   serializedVersion: 7
@@ -477,3 +454,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e40a61783db29b84c9218739e39f218f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyController: {fileID: 7599527526999581127}
