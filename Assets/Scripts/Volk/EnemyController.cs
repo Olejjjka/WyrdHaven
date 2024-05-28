@@ -25,6 +25,10 @@ public class EnemyController : MonoBehaviour
     private Vector3 startingPosition;
     private float speed = 1.5f;
 
+    // Добавляем поля для аудиокомпонентов
+    private AudioSource chaseMusicAudioSource;
+    public AudioSource backgroundMusicAudioSource;
+
     private enum State
     {
         Idle,
@@ -41,6 +45,9 @@ public class EnemyController : MonoBehaviour
         navMeshAgent.updateUpAxis = false;
         state = State.Idle; // Initial state
         currentHealth = maxHealth;
+
+        // Инициализация аудиокомпонента
+        chaseMusicAudioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -204,14 +211,40 @@ public class EnemyController : MonoBehaviour
             {
                 roamingTime = 0f;
                 navMeshAgent.speed = speed; // Reset speed for roaming
+                StopChaseMusic(); // Остановить музыку преследования
             }
             else if (newState == State.Chasing)
             {
                 navMeshAgent.speed = speed * 1.5f; // Increase speed for chasing
+                PlayChaseMusic(); // Включить музыку преследования
             }
             else if (newState == State.Attacking)
             {
                 navMeshAgent.ResetPath();
+            }
+        }
+    }
+
+    private void PlayChaseMusic()
+    {
+        if (chaseMusicAudioSource != null && !chaseMusicAudioSource.isPlaying)
+        {
+            chaseMusicAudioSource.Play();
+            if (backgroundMusicAudioSource != null)
+            {
+                backgroundMusicAudioSource.volume = 0f; // Уменьшить громкость фоновой музыки
+            }
+        }
+    }
+
+    private void StopChaseMusic()
+    {
+        if (chaseMusicAudioSource != null && chaseMusicAudioSource.isPlaying)
+        {
+            chaseMusicAudioSource.Stop();
+            if (backgroundMusicAudioSource != null)
+            {
+                backgroundMusicAudioSource.volume = 1f; // Восстановить громкость фоновой музыки
             }
         }
     }
@@ -240,7 +273,6 @@ public class EnemyController : MonoBehaviour
     public bool IsDead()
     {
         return state == State.Death;
-
     }
 
 }
