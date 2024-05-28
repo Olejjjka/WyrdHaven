@@ -119,11 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &77542474 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4617187538212063136, guid: 6a3b5ea58d062a448ad699fc6ca0d912, type: 3}
-  m_PrefabInstance: {fileID: 93942842}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &83571230
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -193,13 +188,41 @@ PrefabInstance:
       propertyPath: m_Name
       value: Black Werewolf
       objectReference: {fileID: 0}
+    - target: {fileID: 5213124208228434244, guid: 6a3b5ea58d062a448ad699fc6ca0d912, type: 3}
+      propertyPath: _enemyAI
+      value: 
+      objectReference: {fileID: 93942854}
+    - target: {fileID: 5213124208228434244, guid: 6a3b5ea58d062a448ad699fc6ca0d912, type: 3}
+      propertyPath: enemyController
+      value: 
+      objectReference: {fileID: 93942854}
+    - target: {fileID: 5213124208228434244, guid: 6a3b5ea58d062a448ad699fc6ca0d912, type: 3}
+      propertyPath: _enemyController
+      value: 
+      objectReference: {fileID: 93942854}
+    - target: {fileID: 7599527526999581127, guid: 6a3b5ea58d062a448ad699fc6ca0d912, type: 3}
+      propertyPath: visual
+      value: 
+      objectReference: {fileID: 1418577086}
+    - target: {fileID: 7599527526999581127, guid: 6a3b5ea58d062a448ad699fc6ca0d912, type: 3}
+      propertyPath: attackRange
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599527526999581127, guid: 6a3b5ea58d062a448ad699fc6ca0d912, type: 3}
+      propertyPath: attackCooldown
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8146483520150751686, guid: 6a3b5ea58d062a448ad699fc6ca0d912, type: 3}
+      propertyPath: m_SpriteSortPoint
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8848350551120399142, guid: 6a3b5ea58d062a448ad699fc6ca0d912, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.2
+      value: -0.52
       objectReference: {fileID: 0}
     - target: {fileID: 8848350551120399142, guid: 6a3b5ea58d062a448ad699fc6ca0d912, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.56
+      value: -1.39
       objectReference: {fileID: 0}
     - target: {fileID: 8848350551120399142, guid: 6a3b5ea58d062a448ad699fc6ca0d912, type: 3}
       propertyPath: m_LocalPosition.z
@@ -233,42 +256,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2355026346111975231, guid: 6a3b5ea58d062a448ad699fc6ca0d912, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4617187538212063136, guid: 6a3b5ea58d062a448ad699fc6ca0d912, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 93942853}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a3b5ea58d062a448ad699fc6ca0d912, type: 3}
 --- !u!4 &93942843 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8848350551120399142, guid: 6a3b5ea58d062a448ad699fc6ca0d912, type: 3}
   m_PrefabInstance: {fileID: 93942842}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &93942853
+--- !u!114 &93942854 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 7599527526999581127, guid: 6a3b5ea58d062a448ad699fc6ca0d912, type: 3}
+  m_PrefabInstance: {fileID: 93942842}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 77542474}
-  m_Enabled: 0
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a1e901f259c3ed4493399dfb5b0f88b, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d7bf423a2663c741b4b21f498378404, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startingState: 0
-  _roamingDistanceMax: 7
-  _roamingDistanceMin: 3
-  _roamingTimerMax: 2
-  _isAttackingEnemy: 0
-  _isChasingEnemy: 0
-  _chasingDistance: 4
-  _chasingSpeedMultiplier: 1.5
-  _attackingDistance: 2
-  _attackRate: 2
 --- !u!1 &166401940
 GameObject:
   m_ObjectHideFlags: 0
@@ -879,6 +887,17 @@ MonoBehaviour:
   m_BuildHeightMesh: 0
   m_HideEditorLogs: 0
   m_NavMeshData: {fileID: 23800000, guid: 1d71d540bb111b0439f08db7d0f7d112, type: 2}
+--- !u!114 &1418577086 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5213124208228434244, guid: 6a3b5ea58d062a448ad699fc6ca0d912, type: 3}
+  m_PrefabInstance: {fileID: 93942842}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e40a61783db29b84c9218739e39f218f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1809142143
 GameObject:
   m_ObjectHideFlags: 0
@@ -948,7 +967,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingSpeed: 5
-  maxHealth: 100
+  maxHealth: 30
   attackRange: 1.5
   attackDamage: 25
 --- !u!50 &1809142146

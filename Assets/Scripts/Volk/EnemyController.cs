@@ -1,9 +1,13 @@
-using UnityEngine;
+п»їusing UnityEngine;
 using UnityEngine.AI;
 using Wyrd.Utils;
+using System.Collections;
 
 public class EnemyController : MonoBehaviour
 {
+    public event System.EventHandler OnEnemyAttack;
+    public event System.EventHandler OnEnemyDeath;
+
     [SerializeField] private float maxHealth = 100f;
     private float currentHealth;
 
@@ -11,14 +15,15 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float attackCooldown = 2f;
     private float lastAttackTime = 0f;
 
-    [SerializeField] private float chaseRange = 5f; // Радиус обнаружения игрока
-    [SerializeField] private float attackRange = 1.5f; // Радиус атаки
+    [SerializeField] private float chaseRange = 5f; // Distance to start chasing
+    [SerializeField] private float attackRange = 1.5f; // Distance to start attacking
 
     private NavMeshAgent navMeshAgent;
     private State state;
     private float roamingTime;
     private Vector3 roamPosition;
     private Vector3 startingPosition;
+    private float speed = 1.5f;
 
     private enum State
     {
@@ -34,7 +39,7 @@ public class EnemyController : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.updateRotation = false;
         navMeshAgent.updateUpAxis = false;
-        state = State.Idle; // Начальное состояние - Idle
+        state = State.Idle; // Initial state
         currentHealth = maxHealth;
     }
 
@@ -55,17 +60,17 @@ public class EnemyController : MonoBehaviour
                 AttackingBehavior();
                 break;
             case State.Death:
-                // Поведение в состоянии смерти
+                // Handle death state
                 break;
         }
 
-        // Общая проверка состояния на основе расстояния до игрока
+        // Check current state based on distance to player
         CheckCurrentState();
     }
 
     private void IdleBehavior()
     {
-        // Логика для состояния Idle (например, ожидание перед началом роуминга)
+        // Logic for Idle state
     }
 
     private void RoamingBehavior()
@@ -74,13 +79,25 @@ public class EnemyController : MonoBehaviour
         if (roamingTime < 0)
         {
             Roaming();
-            roamingTime = Random.Range(1f, 4f); // Случайный интервал для роуминга
+            roamingTime = Random.Range(1f, 4f); // Set next roaming time
         }
     }
 
     private void ChasingBehavior()
     {
-        navMeshAgent.SetDestination(Player.Instance.transform.position);
+        float distanceToPlayer = Vector3.Distance(transform.position, Player.Instance.transform.position);
+        if (distanceToPlayer <= attackRange)
+        {
+            // РћСЃС‚Р°РЅРѕРІРёС‚СЊ РґРІРёР¶РµРЅРёРµ Рё Р°РЅРёРјР°С†РёСЋ, РµСЃР»Рё РІ РїСЂРµРґРµР»Р°С… РґРёСЃС‚Р°РЅС†РёРё Р°С‚Р°РєРё
+            navMeshAgent.ResetPath();
+        }
+        else
+        {
+            // РџСЂРѕРґРѕР»Р¶РёС‚СЊ РїСЂРµСЃР»РµРґРѕРІР°РЅРёРµ
+            Vector3 playerPosition = Player.Instance.transform.position;
+            ChangeFacingDirection(transform.position, playerPosition);
+            navMeshAgent.SetDestination(playerPosition);
+        }
     }
 
     private void AttackingBehavior()
@@ -101,12 +118,13 @@ public class EnemyController : MonoBehaviour
 
     private Vector3 GetRoamingPosition()
     {
-        return startingPosition + Utils.GetRandomDir() * Random.Range(3f, 7f); // Радиус роуминга
+        return startingPosition + Utils.GetRandomDir() * Random.Range(3f, 7f); // Generate random position
     }
 
     private void ChangeFacingDirection(Vector3 sourcePosition, Vector3 targetPosition)
     {
-        if (sourcePosition.x > targetPosition.x)
+        Vector3 direction = (targetPosition - sourcePosition).normalized;
+        if (direction.x < 0)
         {
             transform.rotation = Quaternion.Euler(0, -180, 0);
         }
@@ -120,7 +138,8 @@ public class EnemyController : MonoBehaviour
     {
         lastAttackTime = Time.time;
         Player.Instance.TakeDamage(damageAmount);
-        Debug.Log("Enemy атаковал Player");
+        OnEnemyAttack?.Invoke(this, System.EventArgs.Empty); // Trigger attack event
+        Debug.Log("Enemy attacked Player");
     }
 
     public void TakeDamage(float damage)
@@ -135,8 +154,26 @@ public class EnemyController : MonoBehaviour
     private void Die()
     {
         state = State.Death;
+        navMeshAgent.isStopped = true;
+        navMeshAgent.enabled = false;
+
+        Collider2D collider = GetComponent<Collider2D>();
+        if (collider != null)
+        {
+            collider.enabled = false;
+        }
+
+        OnEnemyDeath?.Invoke(this, System.EventArgs.Empty); // РўСЂРёРіРіРµСЂ СЃРѕР±С‹С‚РёСЏ СЃРјРµСЂС‚Рё
+        Debug.Log("Enemy died");
+
+        // Р—Р°РїСѓСЃС‚РёС‚СЊ Р·Р°РґРµСЂР¶РєСѓ РїРµСЂРµРґ СѓРЅРёС‡С‚РѕР¶РµРЅРёРµРј РѕР±СЉРµРєС‚Р°
+        StartCoroutine(DelayedDestroy(2f)); // 2 СЃРµРєСѓРЅРґС‹ Р·Р°РґРµСЂР¶РєРё РїРµСЂРµРґ СѓРЅРёС‡С‚РѕР¶РµРЅРёРµРј
+    }
+
+    private IEnumerator DelayedDestroy(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         Destroy(gameObject);
-        Debug.Log("Enemy умер");
     }
 
     private void CheckCurrentState()
@@ -166,12 +203,11 @@ public class EnemyController : MonoBehaviour
             if (newState == State.Roaming)
             {
                 roamingTime = 0f;
-                navMeshAgent.speed = navMeshAgent.speed; // Используйте нужную скорость для роуминга
+                navMeshAgent.speed = speed; // Reset speed for roaming
             }
             else if (newState == State.Chasing)
             {
-                navMeshAgent.ResetPath();
-                navMeshAgent.speed = navMeshAgent.speed * 1.5f; // Используйте нужную скорость для погони
+                navMeshAgent.speed = speed * 1.5f; // Increase speed for chasing
             }
             else if (newState == State.Attacking)
             {
@@ -179,4 +215,32 @@ public class EnemyController : MonoBehaviour
             }
         }
     }
+
+    public bool IsRunning()
+    {
+        return state == State.Roaming || state == State.Chasing;
+    }
+
+    public float GetRoamingAnimationSpeed()
+    {
+        return state == State.Chasing ? 1.5f : 1.0f;
+    }
+
+    public bool IsAttacking()
+    {
+        return state == State.Attacking;
+    }
+
+    public bool IsInRangeToAttack()
+    {
+        float distanceToPlayer = Vector3.Distance(transform.position, Player.Instance.transform.position);
+        return distanceToPlayer <= attackRange;
+    }
+
+    public bool IsDead()
+    {
+        return state == State.Death;
+
+    }
+
 }
