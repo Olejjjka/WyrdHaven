@@ -429,6 +429,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1809142147}
   smoothSpeed: 1
+  mapRenderer: {fileID: 675583784}
 --- !u!1 &433371187
 GameObject:
   m_ObjectHideFlags: 0
