@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         // Обработка атаки при нажатии ЛКМ
-        if (Input.GetMouseButtonDown(0))
+        if (!PauseMenu.GameIsPaused && Input.GetMouseButtonDown(0))
         {
             Debug.Log("Left mouse button pressed");
             Attack();
@@ -37,6 +37,8 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (PauseMenu.GameIsPaused) return;
+
         Vector2 inputVector = GetMovementInput();
         rb.MovePosition(rb.position + inputVector * (movingSpeed * Time.fixedDeltaTime));
 
@@ -107,6 +109,5 @@ public class Player : MonoBehaviour
         PlayerVisual.Instance.TriggerDeathAnimation();
         Debug.Log("Player died!");
     }
-
 
 }
