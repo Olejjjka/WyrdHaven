@@ -4,23 +4,21 @@ using UnityEngine;
 
 public class PlayerVisual : MonoBehaviour
 {
-    [SerializeField] private Player player;
+    public static PlayerVisual Instance { get; private set; }
 
     private Animator animator;
     private SpriteRenderer spriteRenderer;
 
     private const string IS_RUNNING = "IsRunning";
     private const string ATTACK = "Attack";
+    private const string TAKE_DAMAGE = "TakeHit";
+    private const string DEATH = "IsDead";
 
     private void Awake()
     {
+        Instance = this;
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
-    private void Start()
-    {
-        player.OnAttack += Player_OnAttack;
     }
 
     private void Update()
@@ -29,15 +27,11 @@ public class PlayerVisual : MonoBehaviour
         AdjustPlayerFacingDirection();
     }
 
-    private void Player_OnAttack(object sender, System.EventArgs e)
-    {
-        animator.SetTrigger(ATTACK);
-    }
-
     private void AdjustPlayerFacingDirection()
     {
         Vector3 mousePos = GameInput.Instance.GetMousePosition();
         Vector3 playerPos = Player.Instance.GetPlayerScreenPosition();
+
 
         if (mousePos.x < playerPos.x)
         {
@@ -49,13 +43,18 @@ public class PlayerVisual : MonoBehaviour
         }
     }
 
-    public void AxeAttackAnimatoinTurnOff()
+    public void TriggerAttackAnimation()
     {
-        player.AttackColliderTurnOff();
+        animator.SetTrigger(ATTACK);
     }
 
-    public void AxeAttackAnimatoinTurnOn()
+    public void TriggerTakeDamageAnimation()
     {
-        player.AttackColliderTurnOn();
+        animator.SetTrigger(TAKE_DAMAGE);
+    }
+
+    public void TriggerDeathAnimation()
+    {
+        animator.SetTrigger(DEATH);
     }
 }
