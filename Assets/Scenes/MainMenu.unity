@@ -2539,6 +2539,7 @@ MonoBehaviour:
   volumeSlider: {fileID: 542021156}
   resolutionDropdown: {fileID: 1028378117}
   fullscreenToggle: {fileID: 1315085296}
+  gameSceneName: HomeLocation
 --- !u!1 &1486328306
 GameObject:
   m_ObjectHideFlags: 0
