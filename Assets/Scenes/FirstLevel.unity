@@ -777,6 +777,11 @@ Transform:
   - {fileID: 508962322}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &233372218 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6425962048044234701, guid: 9040a74687733fa4cb90e6de323dda6a, type: 3}
+  m_PrefabInstance: {fileID: 4172726385450624745}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &433371187
 GameObject:
   m_ObjectHideFlags: 0
@@ -1408,6 +1413,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 93942843}
+  - {fileID: 233372218}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1177828370
@@ -2204,6 +2210,63 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!1001 &4172726385450624745
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1000875596}
+    m_Modifications:
+    - target: {fileID: 6425962048044234701, guid: 9040a74687733fa4cb90e6de323dda6a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 6425962048044234701, guid: 9040a74687733fa4cb90e6de323dda6a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6425962048044234701, guid: 9040a74687733fa4cb90e6de323dda6a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6425962048044234701, guid: 9040a74687733fa4cb90e6de323dda6a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6425962048044234701, guid: 9040a74687733fa4cb90e6de323dda6a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6425962048044234701, guid: 9040a74687733fa4cb90e6de323dda6a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6425962048044234701, guid: 9040a74687733fa4cb90e6de323dda6a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6425962048044234701, guid: 9040a74687733fa4cb90e6de323dda6a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6425962048044234701, guid: 9040a74687733fa4cb90e6de323dda6a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6425962048044234701, guid: 9040a74687733fa4cb90e6de323dda6a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8037720934301086370, guid: 9040a74687733fa4cb90e6de323dda6a, type: 3}
+      propertyPath: m_Name
+      value: Red Werewolf
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9040a74687733fa4cb90e6de323dda6a, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

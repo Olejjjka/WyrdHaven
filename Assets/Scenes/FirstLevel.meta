@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scenes/HomeLocation.meta
+guid: 48f90c1d87176cd4dbcce89ee40ed990
+========
 guid: bbd698de50d4c374c8a2e408261e37c8
+>>>>>>>> tigr2:Assets/Scenes/FirstLevel.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
