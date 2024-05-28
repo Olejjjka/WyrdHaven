@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class PlayerVisual : MonoBehaviour
 {
+    public static PlayerVisual Instance { get; private set; }
+
     private Animator animator;
     private SpriteRenderer spriteRenderer;
 
     private const string IS_RUNNING = "IsRunning";
+    private const string ATTACK = "Attack";
+    private const string TAKE_DAMAGE = "TakeHit";
+    private const string DEATH = "IsDead";
 
     private void Awake()
     {
+        Instance = this;
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -26,6 +32,7 @@ public class PlayerVisual : MonoBehaviour
         Vector3 mousePos = GameInput.Instance.GetMousePosition();
         Vector3 playerPos = Player.Instance.GetPlayerScreenPosition();
 
+
         if (mousePos.x < playerPos.x)
         {
             spriteRenderer.flipX = true;
@@ -36,4 +43,18 @@ public class PlayerVisual : MonoBehaviour
         }
     }
 
+    public void TriggerAttackAnimation()
+    {
+        animator.SetTrigger(ATTACK);
+    }
+
+    public void TriggerTakeDamageAnimation()
+    {
+        animator.SetTrigger(TAKE_DAMAGE);
+    }
+
+    public void TriggerDeathAnimation()
+    {
+        animator.SetTrigger(DEATH);
+    }
 }

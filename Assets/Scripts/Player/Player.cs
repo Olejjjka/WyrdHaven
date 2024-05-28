@@ -1,4 +1,4 @@
-using System.Collections;
+п»їusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,11 +11,12 @@ public class Player : MonoBehaviour
     [SerializeField] private float maxHealth = 100f;
     private float currentHealth;
 
-    [SerializeField] private float attackRange = 1.5f; // Радиус атаки героя
-    [SerializeField] private float attackDamage = 25f; // Урон атаки героя
+    [SerializeField] private float attackRange = 1.5f; // Р Р°РґРёСѓСЃ Р°С‚Р°РєРё РіРµСЂРѕСЏ
+    [SerializeField] private float attackDamage = 25f; // РЈСЂРѕРЅ Р°С‚Р°РєРё РіРµСЂРѕСЏ
 
     private Rigidbody2D rb;
     private bool isRunning = false;
+    private bool isDead = false;
 
     private void Awake()
     {
@@ -26,10 +27,10 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        // Обработка атаки
-        if (Input.GetKeyDown(KeyCode.Space))
+        // РћР±СЂР°Р±РѕС‚РєР° Р°С‚Р°РєРё РїСЂРё РЅР°Р¶Р°С‚РёРё Р›РљРњ
+        if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Attack key pressed");
+            Debug.Log("Left mouse button pressed");
             Attack();
         }
     }
@@ -69,12 +70,15 @@ public class Player : MonoBehaviour
 
     private void Attack()
     {
-        // Находит всех врагов в радиусе и наносит им урон
+        // Р—Р°РїСѓСЃРє Р°РЅРёРјР°С†РёРё Р°С‚Р°РєРё
+        PlayerVisual.Instance.TriggerAttackAnimation();
+
+        // РќР°С…РѕРґРёС‚ РІСЃРµС… РІСЂР°РіРѕРІ РІ СЂР°РґРёСѓСЃРµ Рё РЅР°РЅРѕСЃРёС‚ РёРј СѓСЂРѕРЅ
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, attackRange);
 
         foreach (Collider2D collider in colliders)
         {
-            // Проверяет, является ли коллайдер BoxCollider2D
+            // РџСЂРѕРІРµСЂСЏРµС‚, СЏРІР»СЏРµС‚СЃСЏ Р»Рё РєРѕР»Р»Р°Р№РґРµСЂ BoxCollider2D Рё РёРјРµРµС‚ Р»Рё РѕРЅ С‚РµРі "Enemy1"
             if (collider is BoxCollider2D && collider.CompareTag("Enemy1"))
             {
                 collider.GetComponent<EnemyController>().TakeDamage(attackDamage);
@@ -83,11 +87,14 @@ public class Player : MonoBehaviour
         }
     }
 
-
     public void TakeDamage(float damage)
     {
+        if (isDead) return;
+
         currentHealth -= damage;
         Debug.Log("Current health: " + currentHealth);
+        PlayerVisual.Instance.TriggerTakeDamageAnimation();
+
         if (currentHealth <= 0)
         {
             Die();
@@ -96,7 +103,10 @@ public class Player : MonoBehaviour
 
     private void Die()
     {
-        // Реализуйте необходимые действия при смерти героя, например, анимацию смерти или перезапуск уровня.
+        isDead = true;
+        PlayerVisual.Instance.TriggerDeathAnimation();
         Debug.Log("Player died!");
     }
+
+
 }
