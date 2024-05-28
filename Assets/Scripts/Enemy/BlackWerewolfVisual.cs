@@ -7,9 +7,8 @@ using UnityEngine;
 
 public class BlackWerewolfVisual : MonoBehaviour
 {
-
-    [SerializeField] private EnemyAI _enemyAI;
-    [SerializeField] private EnemyEntity _enemyEntity;
+    /*
+    [SerializeField] private EnemyController _enemyAI;
 
     private Animator _animator;
     private const string IS_RUNNING = "IsRoaming";
@@ -52,4 +51,5 @@ public class BlackWerewolfVisual : MonoBehaviour
     {
         _animator.SetTrigger(ATTACK);
     }
+    */
 }

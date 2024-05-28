@@ -98,13 +98,12 @@ GameObject:
   - component: {fileID: 5456916971170960194}
   - component: {fileID: 7251297781267619744}
   - component: {fileID: 2362093330243532807}
-  - component: {fileID: 1833053015217432912}
   - component: {fileID: 4038665045985604560}
   - component: {fileID: 1554494216294771483}
-  - component: {fileID: 5842784962175070990}
+  - component: {fileID: 7599527526999581127}
   m_Layer: 0
   m_Name: Black Werewolf
-  m_TagString: Untagged
+  m_TagString: Enemy1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,7 +132,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4617187538212063136}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -211,28 +210,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &1833053015217432912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4617187538212063136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a1e901f259c3ed4493399dfb5b0f88b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _startingState: 1
-  _roamingDistanceMax: 7
-  _roamingDistanceMin: 3
-  _roamingTimerMax: 10
-  _isAttackingEnemy: 0
-  _isChasingEnemy: 1
-  _chasingDistance: 4
-  _chasingSpeedMultiplier: 1.5
-  _attackingDistance: 2
-  _attackRate: 2
 --- !u!61 &4038665045985604560
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -240,7 +217,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4617187538212063136}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -337,7 +314,7 @@ PolygonCollider2D:
       - {x: 0.52309453, y: 0.5863834}
       - {x: 0.5836409, y: 0.5919411}
   m_UseDelaunayMesh: 0
---- !u!114 &5842784962175070990
+--- !u!114 &7599527526999581127
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -346,10 +323,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 4617187538212063136}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93c13e8fca05c444c947ab6159a16cdf, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d7bf423a2663c741b4b21f498378404, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 0
+  maxHealth: 100
+  damageAmount: 10
+  attackCooldown: 2
+  chaseRange: 5
+  attackRange: 1.5
 --- !u!1 &8943374146343242978
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,5 +454,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ef510aabf1a28488819a7822c0b6f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyAI: {fileID: 1833053015217432912}
-  _enemyEntity: {fileID: 5842784962175070990}
+  _enemyAI: {fileID: 0}
+  _enemyEntity: {fileID: 0}
