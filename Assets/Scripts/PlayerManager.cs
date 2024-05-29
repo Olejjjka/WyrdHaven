@@ -45,6 +45,7 @@ public class PlayerManager : MonoBehaviour
     }
 
     // Обновление ссылки на игрока при загрузке новой сцены
+    [System.Obsolete]
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         // Ищем точку появления по идентификатору
@@ -79,11 +80,13 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    [System.Obsolete]
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    [System.Obsolete]
     void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;

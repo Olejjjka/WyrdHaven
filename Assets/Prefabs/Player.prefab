@@ -284,7 +284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingSpeed: 5
-  maxHealth: 100
+  maxHealth: 25
   attackRange: 1.5
   attackDamage: 25
 --- !u!70 &6049448007808860268
