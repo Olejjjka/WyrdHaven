@@ -6,8 +6,6 @@ public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
 
-    //public event Action OnPlayerDeath; // Событие смерти игрока
-
     [SerializeField] private float movingSpeed = 3.5f;
     [SerializeField] private float maxHealth = 25f;
     private float currentHealth;
@@ -105,8 +103,5 @@ public class Player : MonoBehaviour
         isDead = true;
         PlayerVisual.Instance.TriggerDeathAnimation();
         Debug.Log("Player died!");
-
-        // Вызываем событие смерти игрока, если есть подписчики
-        //OnPlayerDeath?.Invoke();
     }
 }
