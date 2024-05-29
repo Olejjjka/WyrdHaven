@@ -7,17 +7,15 @@ public class SceneTransitionTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Triggered by: " + other.name); // Добавлено для отладки
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player entered the trigger zone."); // Добавлено для отладки
+            PlayerManager.instance.SavePlayerState(); // Сохранение состояния игрока перед выходом из сцены
             LoadNextScene();
         }
     }
 
     private void LoadNextScene()
     {
-        Debug.Log("Loading scene: " + sceneToLoad); // Добавлено для отладки
         PlayerPrefs.SetString("SceneToLoad", sceneToLoad);
         SceneManager.LoadScene("LoadingScene");
     }
