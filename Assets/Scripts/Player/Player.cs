@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 [SelectionBase]
@@ -8,11 +7,11 @@ public class Player : MonoBehaviour
     public static Player Instance { get; private set; }
 
     [SerializeField] private float movingSpeed = 3.5f;
-    [SerializeField] private float maxHealth = 100f;
+    [SerializeField] private float maxHealth = 25f;
     private float currentHealth;
 
-    [SerializeField] private float attackRange = 1.5f; // Радиус атаки героя
-    [SerializeField] private float attackDamage = 25f; // Урон атаки героя
+    [SerializeField] private float attackRange = 1.5f;
+    [SerializeField] private float attackDamage = 25f;
 
     private Rigidbody2D rb;
     private bool isRunning = false;
@@ -27,8 +26,9 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        // Обработка атаки при нажатии ЛКМ
-        if (!PauseMenu.GameIsPaused && Input.GetMouseButtonDown(0))
+        if (isDead || PauseMenu.GameIsPaused) return;
+
+        if (Input.GetMouseButtonDown(0))
         {
             Debug.Log("Left mouse button pressed");
             Attack();
@@ -37,19 +37,12 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (PauseMenu.GameIsPaused) return;
+        if (isDead || PauseMenu.GameIsPaused) return;
 
         Vector2 inputVector = GetMovementInput();
         rb.MovePosition(rb.position + inputVector * (movingSpeed * Time.fixedDeltaTime));
 
-        if (Mathf.Abs(inputVector.x) > 0.1f || Mathf.Abs(inputVector.y) > 0.1f)
-        {
-            isRunning = true;
-        }
-        else
-        {
-            isRunning = false;
-        }
+        isRunning = inputVector.magnitude > 0.1f;
     }
 
     public bool IsRunning()
@@ -57,10 +50,15 @@ public class Player : MonoBehaviour
         return isRunning;
     }
 
+    public float GetCurrentHealth()
+    {
+        return currentHealth;
+    }
+
+
     public Vector3 GetPlayerScreenPosition()
     {
-        Vector3 playerScreenPosition = Camera.main.WorldToScreenPoint(transform.position);
-        return playerScreenPosition;
+        return Camera.main.WorldToScreenPoint(transform.position);
     }
 
     private Vector2 GetMovementInput()
@@ -72,15 +70,12 @@ public class Player : MonoBehaviour
 
     private void Attack()
     {
-        // Запуск анимации атаки
         PlayerVisual.Instance.TriggerAttackAnimation();
 
-        // Находит всех врагов в радиусе и наносит им урон
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, attackRange);
 
         foreach (Collider2D collider in colliders)
         {
-            // Проверяет, является ли коллайдер BoxCollider2D и имеет ли он тег "Enemy1"
             if (collider is BoxCollider2D && collider.CompareTag("Enemy1"))
             {
                 if (collider.GetComponent<EnemyController>())
@@ -113,5 +108,4 @@ public class Player : MonoBehaviour
         PlayerVisual.Instance.TriggerDeathAnimation();
         Debug.Log("Player died!");
     }
-
 }

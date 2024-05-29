@@ -22,6 +22,8 @@ public class CameraFollow : MonoBehaviour
         Bounds bounds = mapRenderer.bounds;
         minPosition = new Vector2(bounds.min.x + camHalfWidth, bounds.min.y + camHalfHeight);
         maxPosition = new Vector2(bounds.max.x - camHalfWidth, bounds.max.y - camHalfHeight);
+
+        UpdateTarget(); // Обновляем цель камеры при запуске
     }
 
     void LateUpdate()
@@ -36,6 +38,15 @@ public class CameraFollow : MonoBehaviour
             smoothedPosition.y = Mathf.Clamp(smoothedPosition.y, minPosition.y, maxPosition.y);
 
             transform.position = smoothedPosition;
+        }
+    }
+
+    public void UpdateTarget()
+    {
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null)
+        {
+            target = player.transform; // Обновление цели камеры
         }
     }
 }
