@@ -78,7 +78,11 @@ public class Player : MonoBehaviour
         {
             if (collider is BoxCollider2D && collider.CompareTag("Enemy1"))
             {
-                collider.GetComponent<EnemyController>().TakeDamage(attackDamage);
+                if (collider.GetComponent<EnemyController>())
+                    collider.GetComponent<EnemyController>().TakeDamage(attackDamage);
+                if (collider.GetComponent<BossController>())
+                    collider.GetComponent<BossController>().TakeDamage(attackDamage);
+
                 Debug.Log("Player attacked Enemy with BoxCollider2D");
             }
         }
