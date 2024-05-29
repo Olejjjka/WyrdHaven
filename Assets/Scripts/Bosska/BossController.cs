@@ -14,9 +14,9 @@ public class BossController : MonoBehaviour
     [SerializeField] private float maxHealth = 100f;
     private float currentHealth;
 
-    [SerializeField] private float meleeDamage1 = 10f;
-    [SerializeField] private float meleeDamage2 = 20f;
-    [SerializeField] private float meleeDamage3 = 20f;
+    [SerializeField] private float meleeDamage1 = 3f;
+    [SerializeField] private float meleeDamage2 = 5f;
+    [SerializeField] private float meleeDamage3 = 7f;
     [SerializeField] private float meleeAttackCooldown = 2f;
     private float lastMeleeAttackTime = 0f;
 

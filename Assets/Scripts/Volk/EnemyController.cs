@@ -11,12 +11,12 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float maxHealth = 100f;
     private float currentHealth;
 
-    [SerializeField] private float damageAmount = 10f;
+    [SerializeField] private float damageAmount = 2f;
     [SerializeField] private float attackCooldown = 2f;
     private float lastAttackTime = 0f;
 
-    [SerializeField] private float chaseRange = 5f; // Distance to start chasing
-    [SerializeField] private float attackRange = 1.5f; // Distance to start attacking
+    [SerializeField] private float chaseRange = 5f;
+    [SerializeField] private float attackRange = 1.5f;
 
     private NavMeshAgent navMeshAgent;
     private State state;
@@ -26,7 +26,6 @@ public class EnemyController : MonoBehaviour
     private float speed = 1.5f;
     private float volume_music;
 
-    // Добавляем поля для аудиокомпонентов
     private AudioSource chaseMusicAudioSource;
     public AudioSource backgroundMusicAudioSource;
 
@@ -44,10 +43,9 @@ public class EnemyController : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.updateRotation = false;
         navMeshAgent.updateUpAxis = false;
-        state = State.Idle; // Initial state
+        state = State.Idle;
         currentHealth = maxHealth;
 
-        // Инициализация аудиокомпонента
         chaseMusicAudioSource = GetComponent<AudioSource>();
     }
 
@@ -72,13 +70,11 @@ public class EnemyController : MonoBehaviour
                 break;
         }
 
-        // Check current state based on distance to player
         CheckCurrentState();
     }
 
     private void IdleBehavior()
     {
-        // Logic for Idle state
     }
 
     private void RoamingBehavior()
@@ -87,7 +83,7 @@ public class EnemyController : MonoBehaviour
         if (roamingTime < 0)
         {
             Roaming();
-            roamingTime = Random.Range(1f, 4f); // Set next roaming time
+            roamingTime = Random.Range(1f, 4f);
         }
     }
 
@@ -96,12 +92,10 @@ public class EnemyController : MonoBehaviour
         float distanceToPlayer = Vector3.Distance(transform.position, Player.Instance.transform.position);
         if (distanceToPlayer <= attackRange)
         {
-            // Остановить движение и анимацию, если в пределах дистанции атаки
             navMeshAgent.ResetPath();
         }
         else
         {
-            // Продолжить преследование
             Vector3 playerPosition = Player.Instance.transform.position;
             ChangeFacingDirection(transform.position, playerPosition);
             navMeshAgent.SetDestination(playerPosition);
@@ -126,7 +120,7 @@ public class EnemyController : MonoBehaviour
 
     private Vector3 GetRoamingPosition()
     {
-        return startingPosition + Utils.GetRandomDir() * Random.Range(3f, 7f); // Generate random position
+        return startingPosition + Utils.GetRandomDir() * Random.Range(3f, 7f);
     }
 
     private void ChangeFacingDirection(Vector3 sourcePosition, Vector3 targetPosition)
@@ -146,7 +140,7 @@ public class EnemyController : MonoBehaviour
     {
         lastAttackTime = Time.time;
         Player.Instance.TakeDamage(damageAmount);
-        OnEnemyAttack?.Invoke(this, System.EventArgs.Empty); // Trigger attack event
+        OnEnemyAttack?.Invoke(this, System.EventArgs.Empty);
         Debug.Log("Enemy attacked Player");
     }
 
@@ -171,13 +165,12 @@ public class EnemyController : MonoBehaviour
             collider.enabled = false;
         }
 
-        StopChaseMusic(); // Остановить музыку преследования
+        StopChaseMusic();
 
-        OnEnemyDeath?.Invoke(this, System.EventArgs.Empty); // Триггер события смерти
+        OnEnemyDeath?.Invoke(this, System.EventArgs.Empty);
         Debug.Log("Enemy died");
 
-        // Запустить задержку перед уничтожением объекта
-        StartCoroutine(DelayedDestroy(2f)); // 2 секунды задержки перед уничтожением
+        StartCoroutine(DelayedDestroy(2f));
     }
 
     private IEnumerator DelayedDestroy(float delay)
@@ -213,13 +206,13 @@ public class EnemyController : MonoBehaviour
             if (newState == State.Roaming)
             {
                 roamingTime = 0f;
-                navMeshAgent.speed = speed; // Reset speed for roaming
-                StopChaseMusic(); // Остановить музыку преследования
+                navMeshAgent.speed = speed;
+                StopChaseMusic();
             }
             else if (newState == State.Chasing)
             {
-                navMeshAgent.speed = speed * 1.5f; // Increase speed for chasing
-                PlayChaseMusic(); // Включить музыку преследования
+                navMeshAgent.speed = speed * 1.5f;
+                PlayChaseMusic();
             }
             else if (newState == State.Attacking)
             {
@@ -236,7 +229,7 @@ public class EnemyController : MonoBehaviour
             if (backgroundMusicAudioSource != null)
             {
                 volume_music = backgroundMusicAudioSource.volume;
-                backgroundMusicAudioSource.volume = 0f; // Уменьшить громкость фоновой музыки
+                backgroundMusicAudioSource.volume = 0f;
             }
         }
     }
@@ -248,7 +241,7 @@ public class EnemyController : MonoBehaviour
             chaseMusicAudioSource.Stop();
             if (backgroundMusicAudioSource != null)
             {
-                backgroundMusicAudioSource.volume = volume_music; // Восстановить громкость фоновой музыки
+                backgroundMusicAudioSource.volume = volume_music;
             }
         }
     }
