@@ -31,6 +31,7 @@ public class BossController : MonoBehaviour
     private Vector3 roamPosition;
     private Vector3 startingPosition;
     private float speed = 1.5f;
+    private bool isAttacking = false;
 
     private enum State
     {
@@ -114,26 +115,59 @@ public class BossController : MonoBehaviour
 
     private void AttackingBehavior1()
     {
-        if (Time.time >= lastMeleeAttackTime + meleeAttackCooldown)
+        if (!isAttacking)
         {
-            Attack1();
+            isAttacking = true;
+            StartCoroutine(MeleeAttack1());
         }
+    }
+
+    private IEnumerator MeleeAttack1()
+    {
+        navMeshAgent.isStopped = true; // Останавливаем босса перед атакой
+        yield return new WaitForSeconds(0.5f); // Время задержки перед атакой
+        Attack1();
+        yield return new WaitForSeconds(1.5f); // Время анимации атаки (заменить на длительность анимации)
+        navMeshAgent.isStopped = false; // Возобновляем движение после атаки
+        isAttacking = false;
     }
 
     private void AttackingBehavior2()
     {
-        if (Time.time >= lastMeleeAttackTime + meleeAttackCooldown)
+        if (!isAttacking)
         {
-            Attack2();
+            isAttacking = true;
+            StartCoroutine(MeleeAttack2());
         }
+    }
+
+    private IEnumerator MeleeAttack2()
+    {
+        navMeshAgent.isStopped = true;
+        yield return new WaitForSeconds(0.5f);
+        Attack2();
+        yield return new WaitForSeconds(1.5f);
+        navMeshAgent.isStopped = false;
+        isAttacking = false;
     }
 
     private void AttackingBehavior3()
     {
-        if (Time.time >= lastMeleeAttackTime + meleeAttackCooldown)
+        if (!isAttacking)
         {
-            Attack3();
+            isAttacking = true;
+            StartCoroutine(MeleeAttack3());
         }
+    }
+
+    private IEnumerator MeleeAttack3()
+    {
+        navMeshAgent.isStopped = true;
+        yield return new WaitForSeconds(0.5f);
+        Attack3();
+        yield return new WaitForSeconds(1.5f);
+        navMeshAgent.isStopped = false;
+        isAttacking = false;
     }
 
     private void Roaming()
