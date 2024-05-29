@@ -22,6 +22,12 @@ public class CameraFollow : MonoBehaviour
         Bounds bounds = mapRenderer.bounds;
         minPosition = new Vector2(bounds.min.x + camHalfWidth, bounds.min.y + camHalfHeight);
         maxPosition = new Vector2(bounds.max.x - camHalfWidth, bounds.max.y - camHalfHeight);
+
+        // Найти игрока при старте сцены
+        if (PlayerManager.instance != null)
+        {
+            target = PlayerManager.instance.player.transform;
+        }
     }
 
     void LateUpdate()
@@ -36,6 +42,14 @@ public class CameraFollow : MonoBehaviour
             smoothedPosition.y = Mathf.Clamp(smoothedPosition.y, minPosition.y, maxPosition.y);
 
             transform.position = smoothedPosition;
+        }
+    }
+
+    public void UpdateTarget()
+    {
+        if (PlayerManager.instance != null)
+        {
+            target = PlayerManager.instance.player.transform;
         }
     }
 }

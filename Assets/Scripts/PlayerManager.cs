@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance; // Ссылка на экземпляр PlayerManager
+    public GameObject playerPrefab; // Префаб игрока
     public GameObject player; // Ссылка на игрока (Player)
     private Vector3 playerPosition;
     private Quaternion playerRotation;
@@ -46,9 +47,36 @@ public class PlayerManager : MonoBehaviour
     // Обновление ссылки на игрока при загрузке новой сцены
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        player = GameObject.FindWithTag("Player"); // Найти объект игрока по тегу
-        LoadPlayerState();
-        DontDestroyOnLoad(player); // Не уничтожать игрока при загрузке новых сцен
+        // Ищем точку появления по идентификатору
+        SpawnPoint[] spawnPoints = FindObjectsOfType<SpawnPoint>();
+        string spawnPointID = PlayerPrefs.GetString("SpawnPointID");
+        foreach (var spawnPoint in spawnPoints)
+        {
+            if (spawnPoint.spawnPointID == spawnPointID)
+            {
+                if (player == null)
+                {
+                    // Создаем игрока, если его еще нет
+                    player = Instantiate(playerPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
+                }
+                else
+                {
+                    // Перемещаем существующего игрока
+                    player.transform.localPosition = spawnPoint.transform.position;
+                    player.transform.localRotation = spawnPoint.transform.rotation;
+                }
+                break;
+            }
+        }
+
+        DontDestroyOnLoad(player); // Не уничтожаем игрока при загрузке новых сцен
+
+        // Обновить ссылку на игрока в камере
+        CameraFollow cameraFollow = Camera.main.GetComponent<CameraFollow>();
+        if (cameraFollow != null)
+        {
+            cameraFollow.UpdateTarget(); // Обновление ссылки на игрока в камере
+        }
     }
 
     void OnEnable()
