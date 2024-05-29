@@ -24,6 +24,7 @@ public class EnemyController : MonoBehaviour
     private Vector3 roamPosition;
     private Vector3 startingPosition;
     private float speed = 1.5f;
+    private float volume_music;
 
     // Добавляем поля для аудиокомпонентов
     private AudioSource chaseMusicAudioSource;
@@ -170,6 +171,8 @@ public class EnemyController : MonoBehaviour
             collider.enabled = false;
         }
 
+        StopChaseMusic(); // Остановить музыку преследования
+
         OnEnemyDeath?.Invoke(this, System.EventArgs.Empty); // Триггер события смерти
         Debug.Log("Enemy died");
 
@@ -232,6 +235,7 @@ public class EnemyController : MonoBehaviour
             chaseMusicAudioSource.Play();
             if (backgroundMusicAudioSource != null)
             {
+                volume_music = backgroundMusicAudioSource.volume;
                 backgroundMusicAudioSource.volume = 0f; // Уменьшить громкость фоновой музыки
             }
         }
@@ -244,7 +248,7 @@ public class EnemyController : MonoBehaviour
             chaseMusicAudioSource.Stop();
             if (backgroundMusicAudioSource != null)
             {
-                backgroundMusicAudioSource.volume = 1f; // Восстановить громкость фоновой музыки
+                backgroundMusicAudioSource.volume = volume_music; // Восстановить громкость фоновой музыки
             }
         }
     }

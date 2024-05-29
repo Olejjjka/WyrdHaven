@@ -45,6 +45,8 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1f; // ¬осстановите нормальную скорость времени перед загрузкой главного меню
         GameIsPaused = false; // —брос переменной перед загрузкой главного меню
+        PlayerManager.instance.DestroyPlayer(); // ”дал€ем текущего игрока
         SceneManager.LoadScene("MainMenu");
     }
 }
+
