@@ -23,5 +23,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FirstLevel.unity
     guid: 911af1a41812c244c830f7ed37106c56
+  - enabled: 1
+    path: Assets/Scenes/DialogueScene.unity
+    guid: 5cd17e39b1a34a546826a9b3e365ca34
+  - enabled: 1
+    path: Assets/Scenes/BossLocation.unity
+    guid: 0230a27c0b51c514dbee4a44571abbe3
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
