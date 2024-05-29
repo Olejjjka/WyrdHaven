@@ -55,7 +55,6 @@ public class Player : MonoBehaviour
         return currentHealth;
     }
 
-
     public Vector3 GetPlayerScreenPosition()
     {
         return Camera.main.WorldToScreenPoint(transform.position);
@@ -107,5 +106,23 @@ public class Player : MonoBehaviour
         isDead = true;
         PlayerVisual.Instance.TriggerDeathAnimation();
         Debug.Log("Player died!");
+
+        GameObject gameOverUIObject = GameObject.FindGameObjectWithTag("GameOverUI");
+        if (gameOverUIObject != null)
+        {
+            GameOverUI gameOverUI = gameOverUIObject.GetComponent<GameOverUI>();
+            if (gameOverUI != null)
+            {
+                gameOverUI.ShowDeathPanel();
+            }
+            else
+            {
+                Debug.LogWarning("GameOverUI component not found on the object with tag GameOverUI");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No object found with tag GameOverUI");
+        }
     }
 }
