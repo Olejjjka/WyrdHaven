@@ -24,7 +24,6 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    // Сохранение состояния игрока
     public void SavePlayerState()
     {
         if (player != null)
@@ -34,7 +33,6 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    // Загрузка состояния игрока
     public void LoadPlayerState()
     {
         if (player != null)
@@ -44,8 +42,15 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    // Обновление ссылки на игрока при загрузке новой сцены
-    [System.Obsolete]
+    public void DestroyPlayer()
+    {
+        if (player != null)
+        {
+            Destroy(player);
+            player = null;
+        }
+    }
+
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         // Ищем точку появления по идентификатору
@@ -63,14 +68,17 @@ public class PlayerManager : MonoBehaviour
                 else
                 {
                     // Перемещаем существующего игрока
-                    player.transform.localPosition = spawnPoint.transform.position;
-                    player.transform.localRotation = spawnPoint.transform.rotation;
+                    player.transform.position = spawnPoint.transform.position;
+                    player.transform.rotation = spawnPoint.transform.rotation;
                 }
                 break;
             }
         }
 
-        DontDestroyOnLoad(player); // Не уничтожаем игрока при загрузке новых сцен
+        if (player != null)
+        {
+            DontDestroyOnLoad(player); // Не уничтожаем игрока при загрузке новых сцен
+        }
 
         // Обновить ссылку на игрока в камере
         CameraFollow cameraFollow = Camera.main.GetComponent<CameraFollow>();
@@ -80,13 +88,11 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    [System.Obsolete]
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    [System.Obsolete]
     void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;

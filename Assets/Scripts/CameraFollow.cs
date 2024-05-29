@@ -23,11 +23,7 @@ public class CameraFollow : MonoBehaviour
         minPosition = new Vector2(bounds.min.x + camHalfWidth, bounds.min.y + camHalfHeight);
         maxPosition = new Vector2(bounds.max.x - camHalfWidth, bounds.max.y - camHalfHeight);
 
-        // Найти игрока при старте сцены
-        if (PlayerManager.instance != null)
-        {
-            target = PlayerManager.instance.player.transform;
-        }
+        UpdateTarget(); // Обновляем цель камеры при запуске
     }
 
     void LateUpdate()
@@ -47,9 +43,10 @@ public class CameraFollow : MonoBehaviour
 
     public void UpdateTarget()
     {
-        if (PlayerManager.instance != null)
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null)
         {
-            target = PlayerManager.instance.player.transform;
+            target = player.transform; // Обновление цели камеры
         }
     }
 }
