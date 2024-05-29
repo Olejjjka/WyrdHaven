@@ -2803,6 +2803,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 507329064559983242, guid: ea943e937dbf96746b2d1fe460f39b45, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 166401942}
+    - target: {fileID: 507329064559983242, guid: ea943e937dbf96746b2d1fe460f39b45, type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3846478483343946560, guid: ea943e937dbf96746b2d1fe460f39b45, type: 3}
       propertyPath: m_Name
       value: CanvasHP
