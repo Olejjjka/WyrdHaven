@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerVisual : MonoBehaviour
@@ -23,23 +21,28 @@ public class PlayerVisual : MonoBehaviour
 
     private void Update()
     {
-        animator.SetBool(IS_RUNNING, Player.Instance.IsRunning());
-        AdjustPlayerFacingDirection();
+        if (Player.Instance != null)
+        {
+            animator.SetBool(IS_RUNNING, Player.Instance.IsRunning());
+            AdjustPlayerFacingDirection();
+        }
     }
 
     private void AdjustPlayerFacingDirection()
     {
-        Vector3 mousePos = GameInput.Instance.GetMousePosition();
-        Vector3 playerPos = Player.Instance.GetPlayerScreenPosition();
-
-
-        if (mousePos.x < playerPos.x)
+        if (Player.Instance != null)
         {
-            spriteRenderer.flipX = true;
-        }
-        else
-        {
-            spriteRenderer.flipX = false;
+            Vector3 mousePos = GameInput.Instance.GetMousePosition();
+            Vector3 playerPos = Player.Instance.GetPlayerScreenPosition();
+
+            if (mousePos.x < playerPos.x)
+            {
+                spriteRenderer.flipX = true;
+            }
+            else
+            {
+                spriteRenderer.flipX = false;
+            }
         }
     }
 

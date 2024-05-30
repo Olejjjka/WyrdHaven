@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 [SelectionBase]
 public class Player : MonoBehaviour
@@ -30,7 +29,6 @@ public class Player : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Left mouse button pressed");
             Attack();
         }
     }
@@ -57,7 +55,15 @@ public class Player : MonoBehaviour
 
     public Vector3 GetPlayerScreenPosition()
     {
-        return Camera.main.WorldToScreenPoint(transform.position);
+        if (Camera.main != null)
+        {
+            return Camera.main.WorldToScreenPoint(transform.position);
+        }
+        else
+        {
+            Debug.LogError("Main camera not found!");
+            return Vector3.zero;
+        }
     }
 
     private Vector2 GetMovementInput()
@@ -82,7 +88,7 @@ public class Player : MonoBehaviour
                 if (collider.GetComponent<BossController>())
                     collider.GetComponent<BossController>().TakeDamage(attackDamage);
 
-                Debug.Log("Player attacked Enemy with BoxCollider2D");
+                Debug.Log("Player attacked Enemy");
             }
         }
     }
@@ -106,7 +112,11 @@ public class Player : MonoBehaviour
         isDead = true;
         PlayerVisual.Instance.TriggerDeathAnimation();
         Debug.Log("Player died!");
+        Invoke(nameof(HandleDeath), 3f);
+    }
 
+    private void HandleDeath()
+    {
         GameObject gameOverUIObject = GameObject.FindGameObjectWithTag("GameOverUI");
         if (gameOverUIObject != null)
         {

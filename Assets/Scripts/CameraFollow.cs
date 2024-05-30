@@ -4,7 +4,7 @@ public class CameraFollow : MonoBehaviour
 {
     public Transform target;
     public float smoothSpeed = 0.125f;
-    public SpriteRenderer mapRenderer; // Ссылка на SpriteRenderer спрайта локации
+    public SpriteRenderer mapRenderer;
 
     private float camHalfHeight;
     private float camHalfWidth;
@@ -13,17 +13,15 @@ public class CameraFollow : MonoBehaviour
 
     void Start()
     {
-        // Определение размеров камеры
         Camera cam = Camera.main;
         camHalfHeight = cam.orthographicSize;
         camHalfWidth = cam.aspect * camHalfHeight;
 
-        // Определение границ на основе размера спрайта
         Bounds bounds = mapRenderer.bounds;
         minPosition = new Vector2(bounds.min.x + camHalfWidth, bounds.min.y + camHalfHeight);
         maxPosition = new Vector2(bounds.max.x - camHalfWidth, bounds.max.y - camHalfHeight);
 
-        UpdateTarget(); // Обновляем цель камеры при запуске
+        UpdateTarget();
     }
 
     void LateUpdate()
@@ -33,7 +31,6 @@ public class CameraFollow : MonoBehaviour
             Vector3 desiredPosition = target.position + new Vector3(0, 0, -10);
             Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
 
-            // Ограничение позиции камеры в пределах границ карты
             smoothedPosition.x = Mathf.Clamp(smoothedPosition.x, minPosition.x, maxPosition.x);
             smoothedPosition.y = Mathf.Clamp(smoothedPosition.y, minPosition.y, maxPosition.y);
 
@@ -46,7 +43,7 @@ public class CameraFollow : MonoBehaviour
         GameObject player = GameObject.FindWithTag("Player");
         if (player != null)
         {
-            target = player.transform; // Обновление цели камеры
+            target = player.transform;
         }
     }
 }

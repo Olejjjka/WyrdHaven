@@ -4,13 +4,13 @@ using UnityEngine.SceneManagement;
 
 public class BackgroundChanger : MonoBehaviour
 {
-    public Sprite[] backgrounds; // Массив для хранения спрайтов фона
-    public Image backgroundImage; // Image компонент для отображения фона
-    public Button nextButton; // Кнопка "Далее"
-    public string sceneToLoad = "BossLocation"; // Название сцены для загрузки
-    public string spawnPointID; // Идентификатор точки появления для следующей сцены
+    public Sprite[] backgrounds;
+    public Image backgroundImage;
+    public Button nextButton;
+    public string sceneToLoad = "BossLocation";
+    public string spawnPointID;
 
-    private int currentIndex = 0; // Текущий индекс спрайта
+    private int currentIndex = 0;
 
     void Start()
     {
@@ -27,8 +27,8 @@ public class BackgroundChanger : MonoBehaviour
         }
         else
         {
-            PlayerManager.instance.SavePlayerState(); // Сохранение состояния игрока перед выходом из сцены
-            PlayerPrefs.SetString("SpawnPointID", spawnPointID); // Сохранение идентификатора точки появления
+            PlayerManager.instance.SavePlayerState();
+            PlayerPrefs.SetString("SpawnPointID", spawnPointID);
             LoadNextScene();
         }
     }
