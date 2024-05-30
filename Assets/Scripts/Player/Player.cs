@@ -57,7 +57,15 @@ public class Player : MonoBehaviour
 
     public Vector3 GetPlayerScreenPosition()
     {
-        return Camera.main.WorldToScreenPoint(transform.position);
+        if (Camera.main != null)
+        {
+            return Camera.main.WorldToScreenPoint(transform.position);
+        }
+        else
+        {
+            Debug.LogError("Main camera not found!");
+            return Vector3.zero;
+        }
     }
 
     private Vector2 GetMovementInput()
