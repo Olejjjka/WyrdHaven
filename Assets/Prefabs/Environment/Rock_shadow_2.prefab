@@ -100,8 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fa0352a4d56abd42ad2fc69deb72448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Size: {x: 0.21682262, y: 0.15331231, z: 4}
-  m_Center: {x: -0.0005687624, y: 0.038550787, z: 0}
+  m_Size: {x: 0.21682262, y: 0.25406218, z: 4}
+  m_Center: {x: -0.0005687624, y: 0.08892572, z: 0}
   m_Area: 1
   m_AffectedAgents: ffffffff
 --- !u!70 &3084745873345764003
@@ -138,6 +138,6 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.001225884, y: 0.041788474}
-  m_Size: {x: 0.19774133, y: 0.14073792}
+  m_Offset: {x: -0.0012258776, y: 0.09482363}
+  m_Size: {x: 0.24680851, y: 0.24680851}
   m_Direction: 1

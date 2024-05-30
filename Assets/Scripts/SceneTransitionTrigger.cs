@@ -3,22 +3,30 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransitionTrigger : MonoBehaviour
 {
-    public string sceneToLoad = "FirstLevel"; // Название сцены для загрузки
-    public string spawnPointID; // Идентификатор точки появления для следующей сцены
+    public string sceneToLoad = "FirstLevel"; 
+    public string spawnPointID; 
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            PlayerManager.instance.SavePlayerState(); // Сохранение состояния игрока перед выходом из сцены
-            PlayerPrefs.SetString("SpawnPointID", spawnPointID); // Сохранение идентификатора точки появления
+            PlayerManager.instance.SavePlayerState();
+            PlayerPrefs.SetString("SpawnPointID", spawnPointID);
             LoadNextScene();
         }
     }
 
     private void LoadNextScene()
     {
-        PlayerPrefs.SetString("SceneToLoad", sceneToLoad);
-        SceneManager.LoadScene("LoadingScene");
+        if (sceneToLoad == "MainMenu")
+        {
+            PlayerManager.instance.DestroyPlayer();
+            SceneManager.LoadScene("MainMenu");
+        }
+        else
+        {
+            PlayerPrefs.SetString("SceneToLoad", sceneToLoad);
+            SceneManager.LoadScene("LoadingScene");
+        }
     }
 }
