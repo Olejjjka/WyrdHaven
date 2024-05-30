@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class GameOverUI : MonoBehaviour
 {
@@ -19,8 +18,8 @@ public class GameOverUI : MonoBehaviour
 
     public void MainMenu()
     {
-        Time.timeScale = 1f; // ¬осстановите нормальную скорость времени перед загрузкой главного меню
-        PlayerManager.instance.DestroyPlayer(); // ”дал€ем текущего игрока
+        Time.timeScale = 1f;
+        PlayerManager.instance.DestroyPlayer();
         SceneManager.LoadScene("MainMenu");
     }
 }

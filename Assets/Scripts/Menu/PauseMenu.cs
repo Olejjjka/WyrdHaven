@@ -4,12 +4,12 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
-    public GameObject pauseMenuUI; // Ссылка на UI элемент паузового меню
+    public GameObject pauseMenuUI;
 
     void Start()
     {
-        GameIsPaused = false; // Сброс переменной при старте сцены
-        pauseMenuUI.SetActive(false); // Убедись, что меню паузы отключено в начале
+        GameIsPaused = false;
+        pauseMenuUI.SetActive(false);
     }
 
     void Update()
@@ -43,9 +43,9 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMainMenu()
     {
-        Time.timeScale = 1f; // Восстановите нормальную скорость времени перед загрузкой главного меню
-        GameIsPaused = false; // Сброс переменной перед загрузкой главного меню
-        PlayerManager.instance.DestroyPlayer(); // Удаляем текущего игрока
+        Time.timeScale = 1f;
+        GameIsPaused = false;
+        PlayerManager.instance.DestroyPlayer();
         SceneManager.LoadScene("MainMenu");
     }
 }

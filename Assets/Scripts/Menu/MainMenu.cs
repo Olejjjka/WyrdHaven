@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -18,13 +17,11 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
-        // Инициализация ползунка громкости
         float savedVolume = PlayerPrefs.GetFloat("Volume", 1.0f);
         volumeSlider.value = savedVolume;
         SetVolume(savedVolume);
         volumeSlider.onValueChanged.AddListener(SetVolume);
 
-        // Инициализация разрешений
         resolutions = Screen.resolutions;
         resolutionDropdown.ClearOptions();
         List<string> options = new List<string>();
@@ -47,7 +44,6 @@ public class MainMenu : MonoBehaviour
         resolutionDropdown.RefreshShownValue();
         resolutionDropdown.onValueChanged.AddListener(SetResolution);
 
-        // Инициализация полноэкранного режима
         fullscreenToggle.isOn = PlayerPrefs.GetInt("Fullscreen", Screen.fullScreen ? 1 : 0) == 1;
         fullscreenToggle.onValueChanged.AddListener(SetFullscreen);
     }
@@ -64,14 +60,14 @@ public class MainMenu : MonoBehaviour
 
     public void OpenSettings()
     {
-        settingsPanel.SetActive(true); // Открыть панель настроек
-        gameObject.SetActive(false); // Скрыть главное меню
+        settingsPanel.SetActive(true);
+        gameObject.SetActive(false);
     }
 
     public void CloseSettings()
     {
-        settingsPanel.SetActive(false); // Закрыть панель настроек
-        gameObject.SetActive(true); // Показать главное меню
+        settingsPanel.SetActive(false);
+        gameObject.SetActive(true);
     }
 
     public void SetVolume(float volume)

@@ -77,7 +77,6 @@ public class BossController : MonoBehaviour
                 AttackingBehavior3();
                 break;
             case State.TakingDamage:
-                // Handle Taking Damage state
                 break;
             case State.Death:
                 break;
@@ -100,16 +99,19 @@ public class BossController : MonoBehaviour
 
     private void ChasingBehavior()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, Player.Instance.transform.position);
-        if (distanceToPlayer <= attackRange1)
+        if (Player.Instance != null)
         {
-            navMeshAgent.ResetPath();
-        }
-        else
-        {
-            Vector3 playerPosition = Player.Instance.transform.position;
-            ChangeFacingDirection(transform.position, playerPosition);
-            navMeshAgent.SetDestination(playerPosition);
+            float distanceToPlayer = Vector3.Distance(transform.position, Player.Instance.transform.position);
+            if (distanceToPlayer <= attackRange1)
+            {
+                navMeshAgent.ResetPath();
+            }
+            else
+            {
+                Vector3 playerPosition = Player.Instance.transform.position;
+                ChangeFacingDirection(transform.position, playerPosition);
+                navMeshAgent.SetDestination(playerPosition);
+            }
         }
     }
 
@@ -124,11 +126,11 @@ public class BossController : MonoBehaviour
 
     private IEnumerator MeleeAttack1()
     {
-        navMeshAgent.isStopped = true; // Останавливаем босса перед атакой
-        yield return new WaitForSeconds(0.5f); // Время задержки перед атакой
+        navMeshAgent.isStopped = true;
+        yield return new WaitForSeconds(0.5f);
         Attack1();
-        yield return new WaitForSeconds(1.5f); // Время анимации атаки (заменить на длительность анимации)
-        navMeshAgent.isStopped = false; // Возобновляем движение после атаки
+        yield return new WaitForSeconds(1.5f);
+        navMeshAgent.isStopped = false;
         isAttacking = false;
     }
 
@@ -192,25 +194,34 @@ public class BossController : MonoBehaviour
     private void Attack1()
     {
         lastMeleeAttackTime = Time.time;
-        Player.Instance.TakeDamage(meleeDamage1);
+        if (Player.Instance != null)
+        {
+            Player.Instance.TakeDamage(meleeDamage1);
+        }
         OnEnemyAttack1?.Invoke(this, System.EventArgs.Empty);
-        Debug.Log("Enemy performed melee attack 1");
+        Debug.Log("Boss performed melee attack 1");
     }
 
     private void Attack2()
     {
         lastMeleeAttackTime = Time.time;
-        Player.Instance.TakeDamage(meleeDamage2);
+        if (Player.Instance != null)
+        {
+            Player.Instance.TakeDamage(meleeDamage2);
+        }
         OnEnemyAttack2?.Invoke(this, System.EventArgs.Empty);
-        Debug.Log("Enemy performed melee attack 2");
+        Debug.Log("Boss performed melee attack 2");
     }
 
     private void Attack3()
     {
         lastMeleeAttackTime = Time.time;
-        Player.Instance.TakeDamage(meleeDamage3);
+        if (Player.Instance != null)
+        {
+            Player.Instance.TakeDamage(meleeDamage3);
+        }
         OnEnemyAttack3?.Invoke(this, System.EventArgs.Empty);
-        Debug.Log("Enemy performed melee attack 3");
+        Debug.Log("Boss performed melee attack 3");
     }
 
     public void TakeDamage(float damage)
@@ -230,8 +241,8 @@ public class BossController : MonoBehaviour
 
     private IEnumerator RecoverFromDamage()
     {
-        yield return new WaitForSeconds(1f); // Adjust this time as needed for the damage animation
-        state = State.Chasing; // Or whatever state you want to transition to after taking damage
+        yield return new WaitForSeconds(1f);
+        state = State.Chasing;
     }
 
     private void Die()
@@ -247,7 +258,7 @@ public class BossController : MonoBehaviour
         }
 
         OnEnemyDeath?.Invoke(this, System.EventArgs.Empty);
-        Debug.Log("Enemy died");
+        Debug.Log("Boss died");
 
         StartCoroutine(DelayedDestroy(10f));
     }
@@ -262,46 +273,49 @@ public class BossController : MonoBehaviour
     {
         if (state == State.Death) return;
 
-        float distanceToPlayer = Vector3.Distance(transform.position, Player.Instance.transform.position);
-        State newState = state;
+        if (Player.Instance != null)
+        {
+            float distanceToPlayer = Vector3.Distance(transform.position, Player.Instance.transform.position);
+            State newState = state;
 
-        if (distanceToPlayer <= attackRange1 && Time.time >= lastMeleeAttackTime + meleeAttackCooldown)
-        {
-            newState = State.Attacking1;
-        }
-        else if (distanceToPlayer <= attackRange2 && Time.time >= lastMeleeAttackTime + meleeAttackCooldown)
-        {
-            newState = State.Attacking2;
-        }
-        else if (distanceToPlayer <= attackRange3 && Time.time >= lastMeleeAttackTime + meleeAttackCooldown)
-        {
-            newState = State.Attacking3;
-        }
-        else if (distanceToPlayer <= chaseRange)
-        {
-            newState = State.Chasing;
-        }
-        else if (state != State.Roaming)
-        {
-            newState = State.Roaming;
-        }
-
-        if (newState != state)
-        {
-            state = newState;
-
-            if (newState == State.Roaming)
+            if (distanceToPlayer <= attackRange1 && Time.time >= lastMeleeAttackTime + meleeAttackCooldown)
             {
-                roamingTime = 0f;
-                navMeshAgent.speed = speed;
+                newState = State.Attacking1;
             }
-            else if (newState == State.Chasing)
+            else if (distanceToPlayer <= attackRange2 && Time.time >= lastMeleeAttackTime + meleeAttackCooldown)
             {
-                navMeshAgent.speed = speed * 1.5f;
+                newState = State.Attacking2;
             }
-            else if (newState == State.Attacking1 || newState == State.Attacking2 || newState == State.Attacking3)
+            else if (distanceToPlayer <= attackRange3 && Time.time >= lastMeleeAttackTime + meleeAttackCooldown)
             {
-                navMeshAgent.ResetPath();
+                newState = State.Attacking3;
+            }
+            else if (distanceToPlayer <= chaseRange)
+            {
+                newState = State.Chasing;
+            }
+            else if (state != State.Roaming)
+            {
+                newState = State.Roaming;
+            }
+
+            if (newState != state)
+            {
+                state = newState;
+
+                if (newState == State.Roaming)
+                {
+                    roamingTime = 0f;
+                    navMeshAgent.speed = speed;
+                }
+                else if (newState == State.Chasing)
+                {
+                    navMeshAgent.speed = speed * 1.5f;
+                }
+                else if (newState == State.Attacking1 || newState == State.Attacking2 || newState == State.Attacking3)
+                {
+                    navMeshAgent.ResetPath();
+                }
             }
         }
     }
@@ -338,8 +352,12 @@ public class BossController : MonoBehaviour
 
     public bool IsInRangeToAttack()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, Player.Instance.transform.position);
-        return distanceToPlayer <= attackRange1;
+        if (Player.Instance != null)
+        {
+            float distanceToPlayer = Vector3.Distance(transform.position, Player.Instance.transform.position);
+            return distanceToPlayer <= attackRange1;
+        }
+        return false;
     }
 
     public bool IsDead()
@@ -347,4 +365,3 @@ public class BossController : MonoBehaviour
         return state == State.Death;
     }
 }
-

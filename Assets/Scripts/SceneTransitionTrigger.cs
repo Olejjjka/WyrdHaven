@@ -18,7 +18,15 @@ public class SceneTransitionTrigger : MonoBehaviour
 
     private void LoadNextScene()
     {
-        PlayerPrefs.SetString("SceneToLoad", sceneToLoad);
-        SceneManager.LoadScene("LoadingScene");
+        if (sceneToLoad == "MainMenu")
+        {
+            PlayerManager.instance.DestroyPlayer();
+            SceneManager.LoadScene("MainMenu");
+        }
+        else
+        {
+            PlayerPrefs.SetString("SceneToLoad", sceneToLoad);
+            SceneManager.LoadScene("LoadingScene");
+        }
     }
 }

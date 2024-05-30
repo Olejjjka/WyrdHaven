@@ -66,7 +66,6 @@ public class EnemyController : MonoBehaviour
                 AttackingBehavior();
                 break;
             case State.Death:
-                // Handle death state
                 break;
         }
 

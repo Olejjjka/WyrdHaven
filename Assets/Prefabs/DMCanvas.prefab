@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4419754299864813391}
   - component: {fileID: 7741522625775198104}
   m_Layer: 5
-  m_Name: CanvasDM
+  m_Name: DMCanvas
   m_TagString: GameOverUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -116,8 +116,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathPanel: {fileID: 6690524229116948597}
-  sceneToLoad: FirstLevel
-  spawnPointID: 
 --- !u!1 &4528684530074177012
 GameObject:
   m_ObjectHideFlags: 0
@@ -271,7 +269,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3862351383757380394
 RectTransform:
   m_ObjectHideFlags: 0
